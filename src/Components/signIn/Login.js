@@ -1,15 +1,50 @@
+import axios from "axios";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const body = {
+    email,
+    password,
+  };
+
+  function LoginUser(e) {
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_DB_URL}auth`, body)
+      .then((resp) => navigate("/homePage"))
+      .catch((err) => alert(err.response.data.name));
+  }
+
   return (
     <>
       <Container>
         <CamposLogin>
-          <input placeholder="E-mail" name="email"></input>
-          <input placeholder="Senha" name="senha"></input>
-          <input placeholder="Nome" name="nome"></input>
-          <div className="login">Entrar</div>
+          <form onSubmit={LoginUser}>
+            <input
+              placeholder="E-mail"
+              type={"email"}
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            ></input>
+            <input
+              placeholder="Senha"
+              type={"password"}
+              name="senha"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            ></input>
+            <button className="login" type="submit">
+              Entrar
+            </button>
+          </form>
         </CamposLogin>
         <Link to={"/signUp"}>
           <GoToRegisterPage data-identifier="back-to-login-action">
@@ -33,8 +68,11 @@ const Container = styled.div`
 `;
 
 const CamposLogin = styled.div`
-  display: flex;
-  flex-direction: column;
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
   input {
     font-size: 20px;
     width: 303px;
@@ -53,6 +91,7 @@ const CamposLogin = styled.div`
     font-size: 30px;
     border-radius: 10px;
     margin-bottom: 15px;
+    border: none;
     cursor: pointer;
   }
   img {
@@ -65,4 +104,3 @@ const GoToRegisterPage = styled.div`
   font-size: 20px;
   cursor: pointer;
 `;
-

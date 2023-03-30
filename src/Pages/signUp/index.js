@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import LogoMyPharma from "../../Components/signIn/LogoMyPharma";
-import Cadastro from "../../Components/signUp/Register";
+import Register from "../../Components/signUp/Register";
 
 export default function SignUpPage() {
   return (
     <>
       <SignUpPageContainer>
         <LogoMyPharma/>
-        <Cadastro />
+        <Register />
       </SignUpPageContainer>
     </>
   );
