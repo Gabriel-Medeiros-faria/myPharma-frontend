@@ -1,24 +1,34 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const {Login} = useContext(AuthContext)
   const body = {
     email,
     password,
   };
 
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      navigate("/homePage");
+    }
+  }, [navigate]);
+
   function LoginUser(e) {
     e.preventDefault();
     axios
       .post(`${process.env.REACT_APP_DB_URL}auth`, body)
-      .then((resp) => navigate("/homePage"))
+      .then((resp) => {
+        Login(resp.data)
+        navigate("/homePage")
+      })
       .catch((err) => alert(err.response.data.name));
   }
 

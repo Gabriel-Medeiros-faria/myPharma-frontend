@@ -1,10 +1,8 @@
 
-
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 *{
-    font-family: 'Lexend Deca';
     box-sizing: border-box;
 }
     html, body, div, span, applet, object, iframe,
@@ -33,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         line-height: 1;
-        background-color: #E5E5E5;
+        font-family: 'Lexend Deca';
     }
     ol, ul {
         list-style: none;
