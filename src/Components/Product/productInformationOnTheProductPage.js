@@ -2,42 +2,62 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
+import useUser from "../../Hooks/useUser";
 
 export default function ProductInformationOnTheProductPage() {
-  const [product, setProduct] = useState({})
+  const [product, setProduct] = useState({});
+  let [amount, setAmount] = useState(1);
+  const { id } = useParams();
+  const {user} = useUser()
+  const config = {
+    headers: { "Authorization": `Bearer ${user.token}` }
+  }
 
-  const {id} = useParams()
-
-
-  useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_DB_URL}products/${id}`)
-      .then((resp)=> {
-        console.log(resp.data)
-        setProduct(resp.data)
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_DB_URL}products/${id}`, config)
+      .then((resp) => {
+        console.log(resp.data);
+        setProduct(resp.data);
       })
-      .catch((err)=> console.log(err))
-  },[])
+      .catch((err) => console.log(err));
+  }, []);
+
+  function postProductToCart() {
+    const body = {
+      productId: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      amount: amount,
+    };
+
+    axios
+      .post(`${process.env.REACT_APP_DB_URL}cart`, body, config)
+      .then((resp) => console.log(resp))
+      .catch((err) => console.log(err));
+  }
 
   return (
     <>
       <ProductInformationContainer>
         <ImageProduct>
-          <img
-            src={product.image}
-            alt="Imagem do produto"
-          />
+          <img src={product.image} alt="Imagem do produto" />
         </ImageProduct>
         <InfoProduct>
           <PriceAndAddAmount>
             <p className="price">R${product.price},00</p>
             <Amount>
-              <span>+</span> 1 <span>-</span>
+              <span onClick={() => setAmount((amount -= 1))}>-</span> {amount}{" "}
+              <span onClick={() => setAmount((amount += 1))}>+</span>
             </Amount>
           </PriceAndAddAmount>
 
           <p className="title">{product.name}</p>
           <p className="description">{product.description}</p>
-        <ButtonToAddCart>Comprar</ButtonToAddCart>
+          <ButtonToAddCart onClick={() => postProductToCart()} className="buy">
+            Comprar
+          </ButtonToAddCart>
         </InfoProduct>
       </ProductInformationContainer>
     </>
@@ -80,6 +100,12 @@ const InfoProduct = styled.div`
   .description {
     font-size: 15px;
   }
+  .buy {
+    transition: transform 0.2s ease-in-out;
+    :hover {
+      transform: scale(1.1);
+    }
+  }
 `;
 
 const Amount = styled.div`
@@ -94,6 +120,7 @@ const Amount = styled.div`
   align-items: center;
   span {
     cursor: pointer;
+    margin: 5px;
   }
 `;
 
@@ -103,15 +130,15 @@ const PriceAndAddAmount = styled.div`
 `;
 
 const ButtonToAddCart = styled.div`
-background-color: #52b6ff;
-border-radius: 5px;
-display: flex;
-width: 100%;
-position: absolute;
-bottom: 0;
-justify-content: center;
-align-items: center;
-height: 30px;
-color: white;
-cursor: pointer;
-`
+  background-color: #52b6ff;
+  border-radius: 5px;
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  color: white;
+  cursor: pointer;
+`;

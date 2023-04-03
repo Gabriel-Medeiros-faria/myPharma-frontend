@@ -1,19 +1,32 @@
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import {AiOutlineShoppingCart} from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import Cart from "../Cart/Cart";
+import { useState } from "react";
+import {SlArrowDown} from 'react-icons/sl'
+import LogOut from "./logOut";
 
 export default function Header() {
   const navigate = useNavigate();
+  const [openCart, setOpenCart] = useState(false);
+  const [openLogOut, setOpenLogOut] = useState(false)
 
   return (
     <>
       <HeaderContainer>
+        <SlArrowDown className="logoutArrow"/>
+        <LogOut/>
         <img
           src="https://www.mypharma.com.br/imgs/Logo%20my%20pharma-desk.svg"
           alt="Logo"
           onClick={() => navigate("/homePage")}
-        />
-        <AiOutlineShoppingCart className="cart"/>
+          className="logoMyPharma"/>
+        <AiOutlineShoppingCart className="cart" onClick={()=> setOpenCart(true)}/>
+        {openCart ? (
+          <Cart setOpenCart={setOpenCart}/>
+        ) : (
+          ""
+        )}
       </HeaderContainer>
     </>
   );
@@ -29,7 +42,7 @@ const HeaderContainer = styled.div`
   position: relative;
   position: fixed;
   z-index: 10;
-  .cart{
+  .cart {
     color: white;
     position: absolute;
     right: 30px;
@@ -37,8 +50,7 @@ const HeaderContainer = styled.div`
     cursor: pointer;
   }
 
-
-  img {
+  .logoMyPharma {
     width: 250px;
     animation: float 2s ease-in-out infinite;
     cursor: pointer;
@@ -51,5 +63,12 @@ const HeaderContainer = styled.div`
         transform: translateY(-10px);
       }
     }
+  }
+
+  .logoutArrow{
+    position: absolute;
+    left: 30px;
+    color: white;
+    cursor: pointer;
   }
 `;

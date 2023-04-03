@@ -2,13 +2,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "./Product";
+import useUser from "../../Hooks/useUser";
 
 export default function ListProduct(props) {
   const {products, setProducts, setFixedProducts} = props
+  const {user} = useUser()
+
+  const config = {
+    headers: { "Authorization": `Bearer ${user.token}` }
+}
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_DB_URL}products`)
+      .get(`${process.env.REACT_APP_DB_URL}products`, config)
       .then((resp) => {
         console.log(resp.data);
         setFixedProducts(resp.data)

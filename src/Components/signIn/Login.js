@@ -27,6 +27,7 @@ export default function Login() {
       .post(`${process.env.REACT_APP_DB_URL}auth`, body)
       .then((resp) => {
         Login(resp.data)
+        console.log(resp.data)
         navigate("/homePage")
       })
       .catch((err) => alert(err.response.data.name));
