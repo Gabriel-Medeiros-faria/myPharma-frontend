@@ -11,11 +11,16 @@ export default function Header() {
   const [openCart, setOpenCart] = useState(false);
   const [openLogOut, setOpenLogOut] = useState(false)
 
+  function OpenOrCloseLogOutBox(){
+    if(!openLogOut) setOpenLogOut(true)
+    if(openLogOut) setOpenLogOut(false)
+  }
+
   return (
     <>
       <HeaderContainer>
-        <SlArrowDown className="logoutArrow"/>
-        <LogOut/>
+        <SlArrowDown className="logoutArrow" onClick={()=> OpenOrCloseLogOutBox()}/>
+        {openLogOut? <LogOut/>: ''}
         <img
           src="https://www.mypharma.com.br/imgs/Logo%20my%20pharma-desk.svg"
           alt="Logo"

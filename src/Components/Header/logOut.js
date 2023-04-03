@@ -24,17 +24,26 @@ export default function LogOut() {
 
   return (
     <>
-      <LogOutContainer onClick={()=> deleteSession()}> fasdf</LogOutContainer>
+      <LogOutContainer onClick={()=> deleteSession()}> Sair</LogOutContainer>
     </>
   );
 }
 
 const LogOutContainer = styled.div`
-width: 200px;
-height: 60px;
-background-color: blue;
+width: 100px;
+height: 30px;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #dfdfdf;
+cursor: pointer;
 z-index:111111111111;
+border-radius:5px;
 position: absolute;
 left: 20px;
-bottom: -40px;
+bottom: -10px;
+transition: transform 0.2s ease-in-out;
+:hover {
+    transform: scale(1.1);
+  }
 `;

@@ -7,11 +7,12 @@ import useUser from "../../Hooks/useUser";
 export default function ProductInformationOnTheProductPage() {
   const [product, setProduct] = useState({});
   let [amount, setAmount] = useState(1);
+  const [products, setProducts] = useState([]);
   const { id } = useParams();
-  const {user} = useUser()
+  const { user } = useUser();
   const config = {
-    headers: { "Authorization": `Bearer ${user.token}` }
-  }
+    headers: { Authorization: `Bearer ${user.token}` },
+  };
 
   useEffect(() => {
     axios
@@ -21,21 +22,37 @@ export default function ProductInformationOnTheProductPage() {
         setProduct(resp.data);
       })
       .catch((err) => console.log(err));
+
+    axios
+      .get(`${process.env.REACT_APP_DB_URL}cart`, config)
+      .then((resp) => {
+        setProducts(resp.data);
+        console.log(resp.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
-  function postProductToCart() {
+  function PostProductToCart() {
     const body = {
       productId: product._id,
       name: product.name,
       price: product.price,
       image: product.image,
       amount: amount,
+      userId: user.id,
     };
 
     axios
       .post(`${process.env.REACT_APP_DB_URL}cart`, body, config)
       .then((resp) => console.log(resp))
       .catch((err) => console.log(err));
+  }
+
+  function subAmount() {
+    if (amount > 1) {
+      setAmount((amount -= 1));
+    }
+    return;
   }
 
   return (
@@ -48,14 +65,14 @@ export default function ProductInformationOnTheProductPage() {
           <PriceAndAddAmount>
             <p className="price">R${product.price},00</p>
             <Amount>
-              <span onClick={() => setAmount((amount -= 1))}>-</span> {amount}{" "}
+              <span onClick={() => subAmount()}>-</span> {amount}{" "}
               <span onClick={() => setAmount((amount += 1))}>+</span>
             </Amount>
           </PriceAndAddAmount>
 
           <p className="title">{product.name}</p>
           <p className="description">{product.description}</p>
-          <ButtonToAddCart onClick={() => postProductToCart()} className="buy">
+          <ButtonToAddCart onClick={() => PostProductToCart()} className="buy">
             Comprar
           </ButtonToAddCart>
         </InfoProduct>
