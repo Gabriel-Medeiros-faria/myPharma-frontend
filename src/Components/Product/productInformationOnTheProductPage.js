@@ -18,16 +18,14 @@ export default function ProductInformationOnTheProductPage() {
     axios
       .get(`https://mypharma-api.onrender.com/products/${id}`, config)
       .then((resp) => {
-        console.log(resp.data);
         setProduct(resp.data);
       })
       .catch((err) => console.log(err));
 
     axios
-      .get(`$https://mypharma-api.onrender.com/cart`, config)
+      .get(`https://mypharma-api.onrender.com/cart`, config)
       .then((resp) => {
         setProducts(resp.data);
-        console.log(resp.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -41,7 +39,6 @@ export default function ProductInformationOnTheProductPage() {
       amount: amount,
       userId: user.id,
     };
-
     axios
       .post(`https://mypharma-api.onrender.com/cart`, body, config)
       .then((resp) => console.log(resp))
@@ -88,12 +85,12 @@ const ProductInformationContainer = styled.div`
   width: 60%;
   height: 60%;
   @media (max-width: 700px) {
-      flex-direction: column;
-      align-items:center;
-      justify-content:center;
-      width: 100%;
-      padding: 10px;
-    }
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+  }
 `;
 
 const ImageProduct = styled.div`
@@ -103,10 +100,10 @@ const ImageProduct = styled.div`
     height: 300px;
   }
   @media (max-width: 700px) {
-      width: 100%;
-      margin-bottom: 30px;
-      margin-top: 30px;
-    }
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
 `;
 
 const InfoProduct = styled.div`
@@ -139,10 +136,10 @@ const InfoProduct = styled.div`
     }
   }
   @media (max-width: 700px) {
-      width: 100%;
-      height: 100%;
-      margin-left: 0;
-    }
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
+  }
 `;
 
 const Amount = styled.div`
@@ -160,8 +157,8 @@ const Amount = styled.div`
     margin: 5px;
   }
   @media (max-width: 700px) {
-      width: 100px;
-    }
+    width: 100px;
+  }
 `;
 
 const PriceAndAddAmount = styled.div`

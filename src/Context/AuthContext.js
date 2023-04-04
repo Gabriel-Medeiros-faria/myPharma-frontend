@@ -8,7 +8,6 @@ function AuthProvider({children}){
 
     function Login(resp){
         const UserLocalStorage = JSON.stringify(resp)
-        console.log(UserLocalStorage)
         localStorage.setItem('user', UserLocalStorage)
         const userLocal = localStorage.getItem('user')
         setUser(JSON.parse(userLocal))

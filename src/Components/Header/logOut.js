@@ -15,7 +15,6 @@ export default function LogOut() {
     axios.delete(`https://mypharma-api.onrender.com/auth`, config) 
     .then((resp)=> {
       localStorage.clear()
-      console.log(resp)
       navigate("/")
     })
     .catch((err)=> console.log(err))

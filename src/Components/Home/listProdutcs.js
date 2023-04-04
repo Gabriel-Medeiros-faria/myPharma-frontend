@@ -7,7 +7,6 @@ import useUser from "../../Hooks/useUser";
 export default function ListProduct(props) {
   const {products, setProducts, setFixedProducts} = props
   const {user} = useUser()
-
   const config = {
     headers: { "Authorization": `Bearer ${user.token}` }
 }
@@ -16,7 +15,6 @@ export default function ListProduct(props) {
     axios
       .get(`https://mypharma-api.onrender.com/products`, config)
       .then((resp) => {
-        console.log(resp.data);
         setFixedProducts(resp.data)
         setProducts(resp.data);
       })

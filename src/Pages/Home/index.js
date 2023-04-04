@@ -10,7 +10,6 @@ export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [fixedProducts, setFixedProducts] = useState([]);
   const [openFilterBox, setOpenFilterBox] = useState(false);
-  console.log(openFilterBox);
 
   function OpenOrCloseFIlterBox() {
     if (!openFilterBox) setOpenFilterBox(true);

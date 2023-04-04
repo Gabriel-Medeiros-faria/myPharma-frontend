@@ -27,7 +27,6 @@ export default function Login() {
       .post(`https://mypharma-api.onrender.com/auth`, body)
       .then((resp) => {
         Login(resp.data)
-        console.log(resp.data)
         navigate("/homePage")
       })
       .catch((err) => alert(err.response.data.name));
