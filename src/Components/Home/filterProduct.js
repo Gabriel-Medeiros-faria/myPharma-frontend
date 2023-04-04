@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-export default function FilterProduct() {
+export default function FilterProduct(props) {
+
+  const {OpenOrCloseFIlterBox} = props
+
   return (
     <>
-      <FilterProductContainer>V</FilterProductContainer>
+      <FilterProductContainer onClick={()=> OpenOrCloseFIlterBox()}>
+        V
+      </FilterProductContainer>
     </>
   );
 }
@@ -15,6 +20,7 @@ const FilterProductContainer = styled.div`
   margin-top: 90px;
   margin-left: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 15px;

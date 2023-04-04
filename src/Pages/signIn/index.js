@@ -17,4 +17,8 @@ const SignInPageContainer = styled.div`
   display: flex;
   justify-content: space-between;
   height: 100vh;
+  @media (max-width: 700px) {
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
 `;

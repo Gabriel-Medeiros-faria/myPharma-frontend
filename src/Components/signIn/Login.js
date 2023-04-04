@@ -76,12 +76,20 @@ const Container = styled.div`
   width: 45%;
   height: 100%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  @media (max-width: 700px) {
+      width: 100%;
+      height: 60%;
+      justify-content: start;
+    }
 `;
 
 const CamposLogin = styled.div`
   form {
     display: flex;
     flex-direction: column;
+    @media (max-width: 700px) {
+      margin-top: 30px;
+    }
   }
 
   input {

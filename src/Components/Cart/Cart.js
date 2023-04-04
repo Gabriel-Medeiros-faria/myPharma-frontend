@@ -86,6 +86,9 @@ const CartContainer = styled.div`
     left: 20px;
     top: 15px;
   }
+  @media (max-width: 700px) {
+      width: 70%;
+    }
 `;
 
 const ProductCart = styled.div`

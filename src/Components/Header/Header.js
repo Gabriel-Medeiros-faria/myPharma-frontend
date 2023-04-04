@@ -5,11 +5,14 @@ import Cart from "../Cart/Cart";
 import { useState } from "react";
 import {SlArrowDown} from 'react-icons/sl'
 import LogOut from "./logOut";
+import useUser from "../../Hooks/useUser";
 
 export default function Header() {
   const navigate = useNavigate();
   const [openCart, setOpenCart] = useState(false);
   const [openLogOut, setOpenLogOut] = useState(false)
+  const {user} = useUser()
+  const [nameUser, setNameUser] = useState(user.name)
 
   function OpenOrCloseLogOutBox(){
     if(!openLogOut) setOpenLogOut(true)
@@ -19,6 +22,7 @@ export default function Header() {
   return (
     <>
       <HeaderContainer>
+        <p className="nameUser">{nameUser}</p>
         <SlArrowDown className="logoutArrow" onClick={()=> OpenOrCloseLogOutBox()}/>
         {openLogOut? <LogOut/>: ''}
         <img
@@ -72,8 +76,18 @@ const HeaderContainer = styled.div`
 
   .logoutArrow{
     position: absolute;
-    left: 30px;
+    left: 80px;
     color: white;
     cursor: pointer;
+    @media (max-width: 700px) {
+      bottom:10px;
+      left: 30px;
+    }
+  }
+
+  .nameUser{
+    color: white;
+    position: absolute;
+    left: 20px;
   }
 `;

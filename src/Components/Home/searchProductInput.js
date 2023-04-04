@@ -27,6 +27,7 @@ export default function SearchProductInput(props) {
 const SearchProductInputContainer = styled.input`
   margin-top: 90px;
   width: 50%;
+  height: 40px;
   padding: 5px;
   font-size: 15px;
   border-radius: 5px;

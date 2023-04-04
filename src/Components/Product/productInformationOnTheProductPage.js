@@ -87,14 +87,26 @@ const ProductInformationContainer = styled.div`
   align-items: center;
   width: 60%;
   height: 60%;
+  @media (max-width: 700px) {
+      flex-direction: column;
+      align-items:center;
+      justify-content:center;
+      width: 100%;
+      padding: 10px;
+    }
 `;
 
 const ImageProduct = styled.div`
-  width: 35%;
+  width: 50%;
   img {
     width: 100%;
     height: 300px;
   }
+  @media (max-width: 700px) {
+      width: 100%;
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
 `;
 
 const InfoProduct = styled.div`
@@ -116,6 +128,9 @@ const InfoProduct = styled.div`
   }
   .description {
     font-size: 15px;
+    @media (max-width: 700px) {
+      margin-bottom: 50px;
+    }
   }
   .buy {
     transition: transform 0.2s ease-in-out;
@@ -123,6 +138,11 @@ const InfoProduct = styled.div`
       transform: scale(1.1);
     }
   }
+  @media (max-width: 700px) {
+      width: 100%;
+      height: 100%;
+      margin-left: 0;
+    }
 `;
 
 const Amount = styled.div`
@@ -139,6 +159,9 @@ const Amount = styled.div`
     cursor: pointer;
     margin: 5px;
   }
+  @media (max-width: 700px) {
+      width: 100px;
+    }
 `;
 
 const PriceAndAddAmount = styled.div`

@@ -46,4 +46,7 @@ const ListProductContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding-top: 20px;
+  @media (max-width: 700px) {
+      justify-content:center;
+    }
 `;
