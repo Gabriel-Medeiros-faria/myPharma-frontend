@@ -16,7 +16,7 @@ export default function ProductInformationOnTheProductPage() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_DB_URL}products/${id}`, config)
+      .get(`https://mypharma-api.onrender.com/products/${id}`, config)
       .then((resp) => {
         console.log(resp.data);
         setProduct(resp.data);
@@ -24,7 +24,7 @@ export default function ProductInformationOnTheProductPage() {
       .catch((err) => console.log(err));
 
     axios
-      .get(`${process.env.REACT_APP_DB_URL}cart`, config)
+      .get(`$https://mypharma-api.onrender.com/cart`, config)
       .then((resp) => {
         setProducts(resp.data);
         console.log(resp.data);
@@ -43,7 +43,7 @@ export default function ProductInformationOnTheProductPage() {
     };
 
     axios
-      .post(`${process.env.REACT_APP_DB_URL}cart`, body, config)
+      .post(`https://mypharma-api.onrender.com/cart`, body, config)
       .then((resp) => console.log(resp))
       .catch((err) => console.log(err));
   }

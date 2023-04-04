@@ -12,7 +12,7 @@ export default function LogOut() {
 }
 
   function deleteSession(){
-    axios.delete(`${process.env.REACT_APP_DB_URL}auth`, config) 
+    axios.delete(`https://mypharma-api.onrender.com/auth`, config) 
     .then((resp)=> {
       localStorage.clear()
       console.log(resp)

@@ -17,7 +17,7 @@ export default function Cart(props) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_DB_URL}cart`, config)
+      .get(`https://mypharma-api.onrender.com/cart`, config)
       .then((resp) => {
         setProducts(resp.data);
       })
@@ -26,7 +26,7 @@ export default function Cart(props) {
 
   function deleteProductToCart(id) {
     axios
-      .delete(`${process.env.REACT_APP_DB_URL}cart/${id}`, config)
+      .delete(`https://mypharma-api.onrender.com/cart/${id}`, config)
       .then((resp) => console.log(resp))
       .catch((err) => console.log(err));
 

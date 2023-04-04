@@ -14,7 +14,7 @@ export default function ListProduct(props) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_DB_URL}products`, config)
+      .get(`https://mypharma-api.onrender.com/products`, config)
       .then((resp) => {
         console.log(resp.data);
         setFixedProducts(resp.data)

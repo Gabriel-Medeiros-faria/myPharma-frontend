@@ -24,7 +24,7 @@ export default function Login() {
   function LoginUser(e) {
     e.preventDefault();
     axios
-      .post(`${process.env.REACT_APP_DB_URL}auth`, body)
+      .post(`https://mypharma-api.onrender.com/auth`, body)
       .then((resp) => {
         Login(resp.data)
         console.log(resp.data)
