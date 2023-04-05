@@ -14,6 +14,8 @@ export default function Cart(props) {
   const config = {
     headers: { "Authorization": `Bearer ${user.token}` }
   }
+  let totalPrice = 0
+  products.map((prod)=> totalPrice += prod.price * prod.amount)
 
   useEffect(() => {
     axios
@@ -41,7 +43,7 @@ export default function Cart(props) {
   return (
     <>
       <CartContainer>
-        <p className="titleCart">Seus produtos:</p>
+        <p className="titleCart">Seus produtos: R${totalPrice},00</p>
         <BsArrow90DegLeft className="back" onClick={() => setOpenCart(false)} />
         {products.map((prod) => {
           return (
