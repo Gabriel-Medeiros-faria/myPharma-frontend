@@ -10,12 +10,12 @@ export default function Cart(props) {
   const { setOpenCart } = props;
   const [products, setProducts] = useState([]);
   const [loadProductToCart, setLoadProductToCart] = useState(false);
-  const {user} = UseUser()
+  const { user } = UseUser();
   const config = {
-    headers: { "Authorization": `Bearer ${user.token}` }
-  }
-  let totalPrice = 0
-  products.map((prod)=> totalPrice += prod.price * prod.amount)
+    headers: { Authorization: `Bearer ${user.token}` },
+  };
+  let totalPrice = 0;
+  products.map((prod) => (totalPrice += prod.price * prod.amount));
 
   useEffect(() => {
     axios
@@ -53,9 +53,7 @@ export default function Cart(props) {
                 className="trash"
                 onClick={() => deleteProductToCart(prod.productId)}
               />
-              <p className="titleProduct">
-              {prod.name}
-              </p>
+              <p className="titleProduct">{prod.name}</p>
               <p className="priceProduct">R$ {prod.price},00</p>
               <p className="amountProduct">Quantidade - {prod.amount}</p>
             </ProductCart>
@@ -89,8 +87,11 @@ const CartContainer = styled.div`
     top: 15px;
   }
   @media (max-width: 700px) {
-      width: 70%;
+    width: 70%;
+    .back {
+      top: 35px;
     }
+  }
 `;
 
 const ProductCart = styled.div`
@@ -117,7 +118,7 @@ const ProductCart = styled.div`
     font-size: 15px;
   }
 
-  .amountProduct{
+  .amountProduct {
     margin-top: 5px;
     font-size: 15px;
   }
