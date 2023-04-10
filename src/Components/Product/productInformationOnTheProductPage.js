@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import styled from "styled-components";
 import useUser from "../../Hooks/useUser";
 
@@ -8,6 +8,7 @@ export default function ProductInformationOnTheProductPage() {
   const [product, setProduct] = useState({});
   let [amount, setAmount] = useState(1);
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate()
   const { id } = useParams();
   const { user } = useUser();
   const config = {
@@ -72,6 +73,9 @@ export default function ProductInformationOnTheProductPage() {
           <ButtonToAddCart onClick={() => PostProductToCart()} className="buy">
             Comprar
           </ButtonToAddCart>
+          <ButtonBackToHomePage onClick={()=> navigate('/homePage')} className="back">
+            Comprar mais
+          </ButtonBackToHomePage>
         </InfoProduct>
       </ProductInformationContainer>
     </>
@@ -95,9 +99,10 @@ const ProductInformationContainer = styled.div`
 
 const ImageProduct = styled.div`
   width: 50%;
+  display: flex;
+  justify-content: center;
   img {
-    width: 100%;
-    height: 300px;
+    width: 300px;
   }
   @media (max-width: 700px) {
     width: 100%;
@@ -130,6 +135,12 @@ const InfoProduct = styled.div`
     }
   }
   .buy {
+    transition: transform 0.2s ease-in-out;
+    :hover {
+      transform: scale(1.1);
+    }
+  }
+  .back{
     transition: transform 0.2s ease-in-out;
     :hover {
       transform: scale(1.1);
@@ -179,3 +190,18 @@ const ButtonToAddCart = styled.div`
   color: white;
   cursor: pointer;
 `;
+
+const ButtonBackToHomePage = styled.div`
+  color: #52b6ff;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: -35px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  cursor: pointer;
+`

@@ -9,6 +9,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const body = {
     email,
@@ -18,10 +19,17 @@ export default function Register() {
 
   function CreateUser(e) {
     e.preventDefault();
+    setLoading(true)
     axios
       .post(`https://mypharma-api.onrender.com/user`, body)
-      .then((resp) => navigate("/"))
-      .catch((err) => alert(err.response.data.name));
+      .then((resp) => {
+        navigate("/")
+        setLoading(false)
+      })
+      .catch((err) => {
+        alert(err.response.data.name)
+        setLoading(false)
+      });
   }
 
   return (
@@ -48,7 +56,11 @@ export default function Register() {
               required
             ></input>
             <button className="Register" type="submit">
-              Cadastrar
+              {loading ? (
+                <img src="https://raw.githubusercontent.com/Gabriel-Medeiros-faria/projeto11-trackit/main/src/img/cartoon-snail-loading-loading-gif-animation_2734139.gif"></img>
+              ) : (
+                "Cadastrar"
+              )}
             </button>
           </form>
         </RegistrationFields>
@@ -70,10 +82,10 @@ const Container = styled.div`
   height: 100%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   @media (max-width: 700px) {
-      width: 100%;
-      height: 60%;
-      justify-content: start;
-    }
+    width: 100%;
+    height: 60%;
+    justify-content: start;
+  }
 `;
 
 const RegistrationFields = styled.div`

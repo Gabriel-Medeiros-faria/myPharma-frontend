@@ -9,6 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const {Login} = useContext(AuthContext)
   const body = {
     email,
@@ -23,13 +24,19 @@ export default function Login() {
 
   function LoginUser(e) {
     e.preventDefault();
+    setLoading(true)
     axios
       .post(`https://mypharma-api.onrender.com/auth`, body)
+      
       .then((resp) => {
         Login(resp.data)
         navigate("/homePage")
+        setLoading(false)
       })
-      .catch((err) => alert(err.response.data.name));
+      .catch((err) => {
+        alert(err.response.data.name)
+        setLoading(false)
+      });
   }
 
   return (
@@ -52,7 +59,11 @@ export default function Login() {
               required
             ></input>
             <button className="login" type="submit">
-              Entrar
+            {loading ? (
+                <img src="https://raw.githubusercontent.com/Gabriel-Medeiros-faria/projeto11-trackit/main/src/img/cartoon-snail-loading-loading-gif-animation_2734139.gif"></img>
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
         </CamposLogin>
